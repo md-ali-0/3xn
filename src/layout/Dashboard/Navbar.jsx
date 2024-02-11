@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     return (
-        <header className="flex items-center justify-between px-6 py-3 bg-white border">
+        <header className="flex items-center justify-between px-6 py-3 dark:bg-[#0c1427] border dark:border-slate-800">
             <div className="flex items-center">
                 <button
                     onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -35,7 +35,7 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
                     />
 
                     <input
-                        className="w-32 pl-10 pr-4 focus:outline-none rounded-md form-input sm:w-64 focus:border-indigo-600"
+                        className="w-32 pl-10 border dark:border-slate-800 dark:bg-body pr-4 focus:outline-none rounded form-input sm:w-64 focus:border-primary px-1.5 py-1.5"
                         type="text"
                         placeholder="Search"
                     />
@@ -65,25 +65,25 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
                     ></div>
 
                     <div
-                        className={`absolute right-0 z-10 w-48 mt-2 overflow-hidden bg-white rounded-md shadow-xl ${
+                        className={`absolute right-0 z-10 w-48 mt-2 overflow-hidden bg-white dark:bg-[#0c1427] rounded shadow-xl ${
                             dropdownOpen ? "" : "hidden"
                         }`}
                     >
                         <Link
                             to="#"
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
+                            className="block px-4 py-2 text-sm text-slate-400 hover:bg-primary hover:text-white"
                         >
                             Profile
                         </Link>
                         <Link
                             to="#"
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
+                            className="block px-4 py-2 text-sm text-slate-400 hover:bg-primary hover:text-white"
                         >
                             Products
                         </Link>
                         <Link
                             to="/login"
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
+                            className="block px-4 py-2 text-sm text-slate-400 hover:bg-primary hover:text-white"
                         >
                             Logout
                         </Link>
