@@ -8,12 +8,17 @@ import {
     useReactTable,
 } from "@tanstack/react-table";
 import { useMemo, useState } from "react";
+import Swal from "sweetalert2";
 import Loading from "../../../components/loading/Loading";
 import useAxios from "../../../hooks/useAxios";
 
 const AllUsers = () => {
     const axios = useAxios();
-    const { data: users = [], isLoading } = useQuery({
+    const {
+        data: users = [],
+        isLoading,
+        refetch,
+    } = useQuery({
         queryKey: ["users"],
         queryFn: async () => {
             const response = await axios.post("/users");
@@ -88,13 +93,36 @@ const AllUsers = () => {
     if (isLoading) {
         return <Loading />;
     }
-    const handleDelete = () => {};
+    const handleDelete = async (id) => {
+        try {
+            const swalConfirm = await Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!",
+            });
+            if (swalConfirm.isConfirmed) {
+                await axios.delete(`/delete-user/${id}`);
+                refetch();
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your Camp has been deleted.",
+                    icon: "success",
+                });
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
     console.log(users);
     return (
         <>
             <div>
-                <div className="flex justify-between items-center py-5">
-                    <h3 className="font-Quicksand text-primary/80 text-2xl font-bold">
+                <div className="flex justify-between items-center py-2">
+                    <h3 className="font-Quicksand text-primary text-xl font-bold">
                         All Users
                     </h3>
                     <div className="block relative">

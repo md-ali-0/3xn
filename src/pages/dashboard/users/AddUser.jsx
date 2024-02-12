@@ -14,9 +14,9 @@ const AddUser = () => {
     } = useForm();
     const onSubmit = async (data) => {
         const loadingToast = toast.loading("User Creating ... ");
-
+        
         try {
-            const res = await axios.post("/signup", { ...data, status: true });
+            const res = await axios.post("/add-user", { ...data, status: true });
             console.log(res.dada);
             toast.dismiss(loadingToast);
             toast.success("Successfully created!");
