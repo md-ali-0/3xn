@@ -1,10 +1,17 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
+    const navigate = useNavigate()
+    const {user, logout}= useAuth()
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const handleLogout = async()=>{
+        await logout()
+        navigate('/login')
+    }
     return (
         <header className="flex items-center justify-between px-6 py-3 dark:bg-[#0c1427] border dark:border-slate-800">
             <div className="flex items-center">
@@ -50,9 +57,7 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
                     >
                         <img
                             className="object-cover w-full h-full"
-                            src={
-                                "https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=296&q=80"
-                            }
+                            src={user?.image}
                             alt="Your avatar"
                         />
                     </button>
@@ -65,28 +70,22 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
                     ></div>
 
                     <div
-                        className={`absolute right-0 z-10 w-48 mt-2 overflow-hidden bg-white dark:bg-[#0c1427] rounded shadow-xl ${
+                        className={`absolute right-0 z-10 w-32 mt-2 overflow-hidden bg-white dark:bg-[#0c1427] rounded shadow-xl ${
                             dropdownOpen ? "" : "hidden"
                         }`}
                     >
                         <Link
-                            to="#"
-                            className="block px-4 py-2 text-sm text-slate-400 hover:bg-primary hover:text-white"
+                            to="/profile"
+                            className="block px-4 py-2 text-sm text-slate-400 hover:bg-primary hover:text-white w-full"
                         >
                             Profile
                         </Link>
-                        <Link
-                            to="#"
-                            className="block px-4 py-2 text-sm text-slate-400 hover:bg-primary hover:text-white"
-                        >
-                            Products
-                        </Link>
-                        <Link
-                            to="/login"
-                            className="block px-4 py-2 text-sm text-slate-400 hover:bg-primary hover:text-white"
+                        <button
+                            onClick={handleLogout}
+                            className="block px-4 py-2 text-sm text-slate-400 hover:bg-primary hover:text-white text-left w-full"
                         >
                             Logout
-                        </Link>
+                        </button>
                     </div>
                 </div>
             </div>

@@ -7,9 +7,10 @@ export const AuthProdiver = ({ children }) => {
     const axios = useAxiosPublic();
     const [user, setUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true)
-
+    
     const login = async (email, password) => {
         const response = await axios.post("/login", { email, password });
+        console.log(response);
         localStorage.setItem('token',response.data.token)
         setUser(response.data.user);
         setIsLoading(false)
@@ -33,7 +34,6 @@ export const AuthProdiver = ({ children }) => {
 
     useEffect(()=>{
       const unSubscribe = async ()=>{
-        
         const token = localStorage.getItem('token')
         if (token) {
             try {
