@@ -3,6 +3,7 @@ import Dashboard from "../layout/Dashboard/Dashboard";
 import Login from "../pages/auth/login/Login";
 // import Register from "../pages/auth/register/Register";
 import DashboardHome from "../pages/dashboard/home/DashboardHome";
+import AddUser from "../pages/dashboard/users/AddUser";
 import AllUsers from "../pages/dashboard/users/AllUsers";
 import PrivateRoute from "./PrivateRoute";
 
@@ -18,6 +19,10 @@ const Router = createBrowserRouter([
             {
                 path: '/users',
                 element: <PrivateRoute><AllUsers/></PrivateRoute>
+            },
+            {
+                path: '/add-user',
+                element: <PrivateRoute><AddUser/></PrivateRoute>
             }
         ],
     },
