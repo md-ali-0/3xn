@@ -10,7 +10,6 @@ export const AuthProdiver = ({ children }) => {
     
     const login = async (email, password) => {
         const response = await axios.post("/login", { email, password });
-        console.log(response);
         localStorage.setItem('token',response.data.token)
         setUser(response.data.user);
         setIsLoading(false)

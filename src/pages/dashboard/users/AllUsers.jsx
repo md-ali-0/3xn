@@ -9,7 +9,6 @@ import {
 } from "@tanstack/react-table";
 import { useMemo, useState } from "react";
 import Swal from "sweetalert2";
-import Loading from "../../../components/loading/Loading";
 import useAxios from "../../../hooks/useAxios";
 
 const AllUsers = () => {
@@ -90,9 +89,6 @@ const AllUsers = () => {
         onGlobalFilterChange: setFiltering,
     });
 
-    if (isLoading) {
-        return <Loading />;
-    }
     const handleDelete = async (id) => {
         try {
             const swalConfirm = await Swal.fire({
@@ -105,7 +101,8 @@ const AllUsers = () => {
                 confirmButtonText: "Yes, delete it!",
             });
             if (swalConfirm.isConfirmed) {
-                await axios.delete(`/delete-user/${id}`);
+                const response  = await axios.delete(`/delete-user/${id}`);
+                console.log(response);
                 refetch();
                 Swal.fire({
                     title: "Deleted!",
@@ -117,7 +114,7 @@ const AllUsers = () => {
             console.log(error);
         }
     };
-    console.log(users);
+
     return (
         <>
             <div>
