@@ -38,7 +38,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                                 menu={{ name: "Users", icon: "LuUser" }}
                                 subMenu={[
                                     { name: "Add User", path: "add-user" },
-                                    { name: "All Users", path: "all-users" },
+                                    { name: "All Users", path: "users" },
                                 ]}
                             ></SidebarSubMenu>
                             <SidebarSubMenu
