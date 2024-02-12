@@ -2,12 +2,15 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { GoInfo } from "react-icons/go";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 
 const Login = () => {
     const [passwordShow, setPasswordShow] = useState(false);
-    const navigation = useNavigate()
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    let from = location?.state?.from?.pathname || "/";
     const {login} = useAuth()
     const {
         register,
@@ -24,11 +27,11 @@ const Login = () => {
             toast.success('Login Successfully')
             console.log(data.user);
             if (data.user.role === 'admin') {
-                navigation('/')
-            }else if(data.user.role === 'organiger'){
-                navigation('/')
+                return navigate('/')
+            }else if(data.user.role === 'reseller'){
+                return navigate('/reseller')
             }else{
-                navigation('/')
+                return navigate(from, { replace: true });
             }
         } catch (error) {
             toast.dismiss(toastLoading)
