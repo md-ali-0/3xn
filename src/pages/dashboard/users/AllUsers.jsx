@@ -44,6 +44,11 @@ const AllUsers = () => {
         {
             header: "Status",
             accessorKey: "status",
+            cell: ({ cell: { row } }) => (
+                <>
+                    {row.original.status === true ? <span className="text-white bg-green-600 rounded px-1.5 py-1">Active</span>:<span className="text-white bg-red-600 rounded px-1.5 py-1">Inactive</span>}
+                </>
+            ),
         },
         {
             header: "Created Date",
