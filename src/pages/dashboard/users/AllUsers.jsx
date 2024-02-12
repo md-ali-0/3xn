@@ -8,6 +8,7 @@ import {
     useReactTable,
 } from "@tanstack/react-table";
 import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxios from "../../../hooks/useAxios";
 
@@ -63,7 +64,7 @@ const AllUsers = () => {
             header: "Edit",
             accessor: "_id",
             cell: ({ cell: { row } }) => (
-                <button key={row.original._id}>Edit</button>
+                <Link key={row.original._id} to={`/edit-user/${row.original._id}`}>Edit</Link>
             ),
         },
         {

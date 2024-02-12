@@ -5,7 +5,9 @@ import Login from "../pages/auth/login/Login";
 import DashboardHome from "../pages/dashboard/home/DashboardHome";
 import AddUser from "../pages/dashboard/users/AddUser";
 import AllUsers from "../pages/dashboard/users/AllUsers";
+import EditUser from "../pages/dashboard/users/EditUser";
 import PrivateRoute from "./PrivateRoute";
+
 
 const Router = createBrowserRouter([
     {
@@ -23,6 +25,10 @@ const Router = createBrowserRouter([
             {
                 path: '/add-user',
                 element: <PrivateRoute><AddUser/></PrivateRoute>
+            },
+            {
+                path: '/edit-user/:id',
+                element: <PrivateRoute><EditUser/></PrivateRoute>
             }
         ],
     },
