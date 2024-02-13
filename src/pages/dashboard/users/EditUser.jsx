@@ -1,32 +1,41 @@
-import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { BiErrorCircle } from "react-icons/bi";
-import { useParams } from "react-router-dom";
+import { useLoaderData, useParams } from "react-router-dom";
 import useAxios from "../../../hooks/useAxios";
 
 const EditUser = () => {
     const axios = useAxios();
-    const {id} = useParams()
-    const {data: userDetails = [],} = useQuery({
-        queryKey: ['singleUser'],
-        queryFn: async()=>{
-            const {data} = await axios.post(`/users?id=${id}`)
-            return data
-        }
-    })
+    const { id } = useParams();
+    const userDetails = useLoaderData();
     const {
         register,
         handleSubmit,
         reset,
         formState: { errors },
     } = useForm();
+
     const onSubmit = async (data) => {
-        const loadingToast = toast.loading("User Creating ... ");
-        
+        let updateData = {
+            name: data.name,
+            email: data.email,
+            username: data.username,
+            uuid: data.uuid,
+        };
+        if (data.password !== "") {
+            updateData.password = data.password;
+        }
+
+        console.log(data.plan !== userDetails.plan);
+        if (data.plan !== userDetails.plan) {
+            updateData.purchaseAt = new Date();
+            updateData.status = true;
+        }
+        console.log(updateData);
+        const loadingToast = toast.loading("User Updating ... ");
         try {
-            const res = await axios.post("/add-user", { ...data, status: true });
-            console.log(res.dada);
+            const res = await axios.put(`/edit-user/${id}`, updateData);
+            console.log(res.data);
             toast.dismiss(loadingToast);
             toast.success("Successfully created!");
             reset();
@@ -58,10 +67,10 @@ const EditUser = () => {
                             id="name"
                             type="text"
                             {...register("name", {
-                                required: "Name is required.",
+                                required: "Name is Required",
                             })}
                             placeholder="Enter Full Name"
-                            defaultValue={userDetails[0]?.name}
+                            defaultValue={userDetails?.name}
                             className="px-2.5 py-2 w-full border text-sm bg-body border-primary/20 rounded-md focus:border-primary/20 outline-none transition-colors duration-300"
                         />
                         {errors.name && (
@@ -85,9 +94,9 @@ const EditUser = () => {
                             id="username"
                             type="text"
                             {...register("username", {
-                                required: "Username is required.",
+                                required: "Username is Required",
                             })}
-                            defaultValue={userDetails[0]?.username}
+                            defaultValue={userDetails?.username}
                             placeholder="User Name"
                             className="px-2.5 py-2 w-full border text-sm bg-body border-primary/20 rounded-md focus:border-primary/20 outline-none transition-colors duration-300"
                         />
@@ -112,9 +121,9 @@ const EditUser = () => {
                             id="email"
                             type="text"
                             {...register("email", {
-                                required: "Email is required.",
+                                required: "Email is Required",
                             })}
-                            defaultValue={userDetails[0]?.email}
+                            defaultValue={userDetails?.email}
                             placeholder="Enter Email Address"
                             className="px-2.5 py-2 w-full border text-sm bg-body border-primary/20 rounded-md focus:border-primary/20 outline-none transition-colors duration-300"
                         />
@@ -137,9 +146,9 @@ const EditUser = () => {
                         </label>
                         <select
                             {...register("plan", {
-                                required: "Select a Package",
+                                required: "Packages is Required",
                             })}
-                            value={userDetails[0]?.plan}
+                            defaultValue={userDetails?.plan}
                             className="px-2.5 py-2 w-full border text-sm bg-body border-primary/20 rounded-md focus:border-primary/20 outline-none transition-colors duration-300"
                         >
                             <option value="">Select Packages</option>
@@ -162,14 +171,37 @@ const EditUser = () => {
                             htmlFor="password"
                             className="block text-sm font-medium text-gray-700 py-1.5"
                         >
+                            Device ID
+                        </label>
+                        <input
+                            id="uuid"
+                            type="text"
+                            {...register("uuid")}
+                            placeholder="Enter Device ID"
+                            defaultValue={userDetails?.uuid}
+                            className="px-2.5 py-2 w-full border text-sm bg-body border-primary/20 rounded-md focus:border-primary/20 outline-none transition-colors duration-300"
+                        />
+                        {errors.uuid && (
+                            <span className="text-center text-red-500 flex items-center gap-1">
+                                <BiErrorCircle
+                                    className="inline-block ml-2"
+                                    size={15}
+                                />
+                                {errors.uuid?.message}
+                            </span>
+                        )}
+                    </div>
+                    <div className="col-span-full">
+                        <label
+                            htmlFor="password"
+                            className="block text-sm font-medium text-gray-700 py-1.5"
+                        >
                             Password
                         </label>
                         <input
                             id="password"
                             type="password"
-                            {...register("password", {
-                                required: "Password is required.",
-                            })}
+                            {...register("password")}
                             placeholder="Enter Password"
                             className="px-2.5 py-2 w-full border text-sm bg-body border-primary/20 rounded-md focus:border-primary/20 outline-none transition-colors duration-300"
                         />

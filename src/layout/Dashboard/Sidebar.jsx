@@ -18,8 +18,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                         : "-translate-x-full ease-in"
                 }`}
             >
-                <div className="flex items-center justify-center border-b dark:border-slate-800 py-3">
-                    <h3 className="text-4xl">3<span className="text-primary">xn</span></h3>
+                <div className="flex items-center justify-center border-b border-slate-800 py-3">
+                    <h3 className="text-4xl text-gray-400">3<span className="text-primary">xn</span></h3>
                 </div>
                 <div className="overflow-y-auto custom-scroll">
                     <nav className="mt-5 px-3">

@@ -17,7 +17,7 @@ const AddUser = () => {
         
         try {
             const res = await axios.post("/add-user", { ...data, status: true });
-            console.log(res.dada);
+            console.log(res.data);
             toast.dismiss(loadingToast);
             toast.success("Successfully created!");
             reset();

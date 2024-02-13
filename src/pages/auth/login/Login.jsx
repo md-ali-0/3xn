@@ -25,7 +25,6 @@ const Login = () => {
             const {data} = await login(email, password)
             toast.dismiss(toastLoading)
             toast.success('Login Successfully')
-            console.log(data.user);
             if (data.user.role === 'admin') {
                 return navigate('/')
             }else if(data.user.role === 'reseller'){
@@ -42,7 +41,7 @@ const Login = () => {
         <>
             <div className="flex justify-center items-center w-full h-screen">
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="bg-white dark:bg-[#0c1427] px-10 py-10 rounded border border-gray-800 w-screen shadow-md max-w-sm">
+                    <div className="bg-white dark:bg-[#0c1427] px-10 py-10 rounded border dark:border-gray-800 w-screen shadow-md max-w-sm">
                         <div className="space-y-4">
                             <div className="text-center space-y-2">
                                 <h1 className="text-xl font-semibold">
