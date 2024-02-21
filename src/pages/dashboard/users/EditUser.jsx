@@ -37,8 +37,7 @@ const EditUser = () => {
             const res = await axios.put(`/edit-user/${id}`, updateData);
             console.log(res.data);
             toast.dismiss(loadingToast);
-            toast.success("Successfully created!");
-            reset();
+            toast.success("Successfully Edited!");
         } catch (error) {
             console.log(error);
         }

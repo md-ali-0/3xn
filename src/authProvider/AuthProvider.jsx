@@ -32,18 +32,20 @@ export const AuthProdiver = ({ children }) => {
     };
 
     useEffect(()=>{
+
       const unSubscribe = async ()=>{
+        setIsLoading(true)
         const token = localStorage.getItem('token')
         if (token) {
             try {
-                setIsLoading(true)
                 const response = await axios.post('/token-verify', {token})
+                console.log(response.data);
                 setUser(response.data)
-                setIsLoading(false)
             } catch (error) {
                 console.error('Token verification failed:', error);
                 setUser(null)
                 localStorage.removeItem('token')
+            } finally{
                 setIsLoading(false)
             }
         } else{
@@ -52,8 +54,8 @@ export const AuthProdiver = ({ children }) => {
         }
       }
       
-      return () => unSubscribe()
-    },[axios])
+      unSubscribe()
+    },[])
     
     const userInfo = {
         login,

@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
 
 const axiosSecure = axios.create({
-  baseURL: 'https://3xn-server.vercel.app'
-  // baseURL: "http://localhost:8080",
+  // baseURL: 'https://3xn-server.vercel.app'
+  baseURL: "http://localhost:8080",
 });
 
 const useAxios = () => {
