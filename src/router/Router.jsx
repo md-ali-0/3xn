@@ -28,7 +28,7 @@ const Router = createBrowserRouter([
             },
             {
                 path: '/edit-user/:id',
-                loader: ({params})=>fetch(`http://localhost:8080/user/${params.id}`,{method: "POST"}),
+                loader: ({params})=>fetch(`https://3xn-server.vercel.app/user/${params.id}`,{method: "POST"}),
                 element: <PrivateRoute><EditUser/></PrivateRoute>
             }
         ],
