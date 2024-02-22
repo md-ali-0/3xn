@@ -152,7 +152,7 @@ const EditUser = () => {
                             className="px-2.5 py-2 w-full border text-sm bg-body border-primary/20 rounded-md focus:border-primary/20 outline-none transition-colors duration-300"
                         >
                             <option value="">Select Packages</option>
-                            <option value="1 Day">6 Hours</option>
+                            <option value="1 Day">1 Day</option>
                             <option value="7 Days">7 Days</option>
                             <option value="15 Days">15 Days</option>
                             <option value="30 Days">30 Days</option>
