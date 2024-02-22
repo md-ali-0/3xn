@@ -35,6 +35,13 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                                 }}
                             />
                             <SidebarSubMenu
+                                menu={{ name: "Emails", icon: "LuMail" }}
+                                subMenu={[
+                                    { name: "All Emails", path: "emails" },
+                                    { name: "All Numbers", path: "numbers" },
+                                ]}
+                            ></SidebarSubMenu>
+                            <SidebarSubMenu
                                 menu={{ name: "Users", icon: "LuUser" }}
                                 subMenu={[
                                     { name: "Add User", path: "add-user" },

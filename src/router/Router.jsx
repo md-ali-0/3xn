@@ -7,7 +7,8 @@ import AddUser from "../pages/dashboard/users/AddUser";
 import AllUsers from "../pages/dashboard/users/AllUsers";
 import EditUser from "../pages/dashboard/users/EditUser";
 import PrivateRoute from "./PrivateRoute";
-
+import AllNumbers from "../pages/dashboard/emails/AllNumbers";
+import AllEmails from "../pages/dashboard/emails/AllEmails";
 
 const Router = createBrowserRouter([
     {
@@ -30,6 +31,14 @@ const Router = createBrowserRouter([
                 path: '/edit-user/:id',
                 loader: ({params})=>fetch(`https://3xn-server.vercel.app/user/${params.id}`,{method: "POST"}),
                 element: <PrivateRoute><EditUser/></PrivateRoute>
+            },
+            {
+                path: '/emails',
+                element: <PrivateRoute><AllEmails/></PrivateRoute>
+            },
+            {
+                path: '/numbers',
+                element: <PrivateRoute><AllNumbers/></PrivateRoute>
             }
         ],
     },

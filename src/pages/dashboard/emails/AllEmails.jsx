@@ -10,7 +10,7 @@ import {
 import { useMemo, useState } from "react";
 import useAxios from "../../../hooks/useAxios";
 
-const AllNumbers = () => {
+const AllEmails = () => {
     const axios = useAxios();
     const {
         data: users = [],
@@ -18,7 +18,7 @@ const AllNumbers = () => {
     } = useQuery({
         queryKey: ["users"],
         queryFn: async () => {
-            const response = await axios.post("/all-numbers");
+            const response = await axios.post("/all-emails");
             return response.data;
         },
     });
@@ -28,25 +28,24 @@ const AllNumbers = () => {
 
     const columns = [
         {
-            header: "number",
-            accessorKey: "number",
+            header: "email",
+            accessorKey: "email",
         },
         {
             header: "password",
             accessorKey: "password",
         },
         {
-            header: "dataName",
-            accessorKey: "dataName",
+            header: "recovery",
+            accessorKey: "recovery",
         },
         {
-            header: "used",
-            accessorKey: "used",
-            cell: ({ cell: { row } }) => (
-                <>
-                    {row.original.status === true ? <span className="text-white bg-green-600 rounded px-1.5 py-1">Active</span>:<span className="text-white bg-red-600 rounded px-1.5 py-1">Inactive</span>}
-                </>
-            ),
+            header: "year",
+            accessorKey: "year",
+        },
+        {
+            header: "userBy",
+            accessorKey: "userBy",
         },
         {
             header: "Created Date",
@@ -78,7 +77,7 @@ const AllNumbers = () => {
             <div>
                 <div className="flex justify-between items-center py-2">
                     <h3 className="font-Quicksand text-primary text-xl font-bold">
-                        All Numbers
+                        All Emails
                     </h3>
                     <div className="block relative">
                         <input
@@ -180,4 +179,4 @@ const AllNumbers = () => {
     );
 };
 
-export default AllNumbers;
+export default AllEmails;
