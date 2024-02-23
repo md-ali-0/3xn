@@ -36,7 +36,7 @@ const AllNumbers = () => {
             accessorKey: "password",
         },
         {
-            header: "dataName",
+            header: "User",
             accessorKey: "dataName",
         },
         {
@@ -44,7 +44,7 @@ const AllNumbers = () => {
             accessorKey: "used",
             cell: ({ cell: { row } }) => (
                 <>
-                    {row.original.status === true ? <span className="text-white bg-green-600 rounded px-1.5 py-1">Active</span>:<span className="text-white bg-red-600 rounded px-1.5 py-1">Inactive</span>}
+                    {row.original.status === true ? <span className="text-white bg-green-600 rounded px-1.5 py-1">Yes</span>:<span className="text-white bg-red-600 rounded px-1.5 py-1">No</span>}
                 </>
             ),
         },
