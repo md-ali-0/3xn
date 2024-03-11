@@ -39,7 +39,6 @@ export const AuthProdiver = ({ children }) => {
         if (token) {
             try {
                 const response = await axios.post('/token-verify', {token})
-                console.log(response.data);
                 setUser(response.data)
             } catch (error) {
                 console.error('Token verification failed:', error);
