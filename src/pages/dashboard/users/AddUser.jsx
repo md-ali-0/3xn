@@ -105,6 +105,7 @@ const AddUser = () => {
                             })}
                             placeholder="Enter Email Address"
                             className="px-2.5 py-2 w-full border text-sm bg-body border-primary/20 rounded-md focus:border-primary/20 outline-none transition-colors duration-300"
+                            defaultValue={'@gmail.com'}
                         />
                         {errors.email && (
                             <span className="text-center text-red-500 flex items-center gap-1">
@@ -131,7 +132,7 @@ const AddUser = () => {
                         >
                             <option value="">Select Packages</option>
                             <option value="1 Day">1 Day</option>
-                            <option value="7 Days">7 Days</option>
+                            <option value="7 Days" selected>7 Days</option>
                             <option value="15 Days">15 Days</option>
                             <option value="30 Days">30 Days</option>
                         </select>
